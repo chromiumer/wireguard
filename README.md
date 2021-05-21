@@ -26,7 +26,12 @@ ip6_udp_tunnel         16384  1 wireguard
 udp_tunnel             16384  1 wireguard
 ```
 
-2.config file.
+2.配置文件
+```
+生成公私钥密钥: wg genkey | tee wireguard-private.key | wg pubkey > wireguard-public.key
+私钥文件: wireguard-private.key
+公钥文件: wireguard-public.key
+```
 ```
 cat <<EOF>> /etc/wireguard/wg0.conf
 [Interface]
@@ -34,11 +39,10 @@ Address = 1.1.1.1/24
 SaveConfig = true
 PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE;
 PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE;
-ListenPort = 12222
-PrivateKey = server-private-key
+ListenPort = 666
+PrivateKey =  wireguard-private.key //私钥文件内容
 EOF
 ```
->generate private&public key: wg genkey | tee wireguard-private.key | wg pubkey > wireguarrd-public.key
 
 open route forward.
 ```
