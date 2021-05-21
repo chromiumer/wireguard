@@ -105,7 +105,7 @@ wg-quick up wg0
 wg-quick down wg0
 ```
 
-#### 
+#### 默认所有流量都会通过wg0转发出去，通过以下方式管理本地路由。
 ```
 route -n delete -inet 0.0.0.0/1
 route -q -n add -inet 10.0.0/24 -interface utun5
