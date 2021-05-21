@@ -2,7 +2,7 @@
 
 ### 服务端
 
-1.安装(CentOS7/8)
+安装(CentOS7/8)
 
 ##### CentOS7
 
@@ -26,7 +26,7 @@ ip6_udp_tunnel         16384  1 wireguard
 udp_tunnel             16384  1 wireguard
 ```
 
-2.配置文件
+配置文件
 ```
 生成公私钥密钥: wg genkey | tee wireguard-private.key | wg pubkey > wireguard-public.key
 私钥文件: wireguard-private.key
@@ -61,7 +61,7 @@ wg-quick down wg0
 interface: wg0
   public key: server-public-key
   private key: (hidden)
-  listening port: 12222
+  listening port: 666
 ```
 ##### 管理client
 
@@ -73,14 +73,15 @@ wg set wg0 peer client-public-key remove
 ```
 ---
 
-### Client
+客户端
 
-1.Install packages(MacOS)
+#### 安装wireguard client (MacOS)
 ```
 brew install wireguard-tools
 ```
 
-2.config file.
+#### 配置文件
+
 ```
 cat <<EOF>> /etc/wireguard/wg0.conf
 [Interface]
@@ -92,22 +93,19 @@ DNS = 114.114.114.114
 
 [Peer]
 PublicKey = server-public-key
-Endpoint = server-ip:12222
+Endpoint = server-ip:666
 AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 30
 EOF
 ```
->generate private&public key: wg genkey | tee wireguard-private.key | wg pubkey > wireguarrd-public.key
 
-3.start&stop wg0
+##### 服务起停
 ```
 wg-quick up wg0
 wg-quick down wg0
 ```
 
-ps:
-By default, all client routes will be proxied out, and the routes will need to be modified so that only the remote host will take the wg0 network card
-
+#### 
 ```
 route -n delete -inet 0.0.0.0/1
 route -q -n add -inet 10.0.0/24 -interface utun5
