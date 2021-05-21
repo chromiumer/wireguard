@@ -1,8 +1,10 @@
 # wireguard
 
-### Server
+### 服务端
 
-1.Install packages(Centos7)
+1.安装(CentOS7/8)
+
+##### CentOS7
 
 ```
 curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
@@ -10,8 +12,13 @@ yum -y install epel-release
 yum -y install wireguard-dkms wireguard-tools
 yum -y update
 ```
+##### CentOS8
+```
+yum install elrepo-release epel-release
+yum install kmod-wireguard wireguard-tools
+```
 
-check kernel mod.
+##### 加载内核模块
 ```
 [root@localhost ~]# modprobe wireguard && lsmod | grep wireguard
 wireguard             217088  0
