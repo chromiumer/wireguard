@@ -44,32 +44,33 @@ PrivateKey =  wireguard-private.key //私钥文件内容
 EOF
 ```
 
-open route forward.
+##### 开启路由转发
 ```
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 ```
 
-3.start&stop wg0
+##### 服务起停
 ```
 wg-quick up wg0
 wg-quick down wg0
 ```
 
-wg //check wg server
+##### wg 检查服务
 ```
 interface: wg0
   public key: server-public-key
   private key: (hidden)
   listening port: 12222
 ```
+##### 管理client
 
-after client config complete. set server peer like this.
-
->wg set wg0 peer client-public-key  allowed-ips 1.1.1.2/32  //add client
-
->wg set wg0 peer client-public-key remove //delete client
-
+```
+添加client
+wg set wg0 peer client-public-key  allowed-ips 1.1.1.2/32
+删除client
+wg set wg0 peer client-public-key remove
+```
 ---
 
 ### Client
