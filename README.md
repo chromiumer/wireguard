@@ -1,18 +1,21 @@
 # wireguard
 
+### 说明：wireguard使用udp协议通信，服务端和客户端只通过交换公钥实现数据加解密。
+
 ### 服务端
 
 安装(CentOS7/8)
 
-##### CentOS7
+##### CentOS 7
 
 ```
 curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
 yum -y install epel-release
 yum -y install wireguard-dkms wireguard-tools
 yum -y update
+reboot
 ```
-##### CentOS8
+##### CentOS 8
 ```
 yum install elrepo-release epel-release
 yum install kmod-wireguard wireguard-tools
