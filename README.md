@@ -119,7 +119,7 @@ route -q -n add -inet 10.0.0/24 -interface utun5
 办公网1台PC或工控机（安装CentOS）。
 
 #### 开启路由转发
-
+```
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 
@@ -131,13 +131,16 @@ iptables -P INPUT ACCEPT
 iptables -P OUTPUT ACCEPT
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables-save
-
+```
 #### crontab 上班时间开启，下班时间关闭（减少连接时间，避免ip或port被ban。）
+```
 0 9 * * * sudo wg-quick up wg0
 0 17 * * * sudo wg-quick down wg0
+```
 
 #### wifi路由器配置dhcp服务，网关指向PC或工控机，连接wifi畅通访问Github学习最新技术。
 
-Ennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnd
 
-Ref：https://www.wireguard.com/install/
+Doc Ref：https://www.wireguard.com/install
+
+Ennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnd
