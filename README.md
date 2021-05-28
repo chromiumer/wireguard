@@ -141,8 +141,20 @@ iptables-save
 0 17 * * * sudo wg-quick down wg0
 ```
 
-#### wifi路由器配置dhcp服务，网关指向PC或工控机，连接wifi畅通访问Github学习最新技术。
+```
+                                             \ | /  <----- Hi I'm wifi !!
+Wireguard Client                              \|/ 
+工控机<------------------------>(LAN)Tp-Link-Router(wireless)(WAN)<---------->(Lan)office site ...... <----------->Wireguard Server
+static 192.168.1.103                    192.168.1.253
+  ^                                DHCP DefaultGW 192.168.1.103
+  |_____________________________________________|
 
+1.工控机配置静态(必须是静态)ip
+2.路由器Web配置DHCP服务网关指向192.168.1.103
+3.工控机运行Wireguard Client全局流量走向Wireguard Server
+4.用户(手机/PC)连接Wifi全局出国学习。
+
+```
 
 Doc Ref：https://www.wireguard.com/install
 
