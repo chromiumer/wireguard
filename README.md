@@ -9,10 +9,9 @@
 ##### CentOS 7
 
 ```
-curl -Lo /etc/yum.repos.d/wireguard.repo https://copr.fedorainfracloud.org/coprs/jdoss/wireguard/repo/epel-7/jdoss-wireguard-epel-7.repo
-yum -y install epel-release
-yum -y install wireguard-dkms wireguard-tools
-yum -y update
+yum install epel-release elrepo-release
+yum install yum-plugin-elrepo
+yum install kmod-wireguard wireguard-tools
 reboot
 ```
 ##### CentOS 8
